@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors';
 import { config } from './config';
 import userRouter from './routes/user.routes';
 
@@ -7,6 +8,7 @@ const app: Application = express();
 /* Middlewares */
 app.use(express.json());
 app.set('port', config.PORT);
+app.use(cors());
 
 /* Routes */
 app.use('/user', userRouter);
