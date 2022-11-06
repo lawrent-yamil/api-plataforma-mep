@@ -8,14 +8,18 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const login = (req, res) => {
     const { email, password } = req.body;
     /* Hacer busqueda en la base de datos */
-    if (email === 'admin' && password === 'admin') {
-        const token = jsonwebtoken_1.default.sign({ email }, 'secretKey', {
+    const user = {
+        email: 'admin',
+        password: 'admin',
+    };
+    if (email === user.email && password === user.password) {
+        const token = jsonwebtoken_1.default.sign({ email: user.email }, 'secretkey', {
             expiresIn: '1h',
         });
         return res.json({ token });
     }
     else {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        return res.status(401).json({ message: 'Email o contraseña incorrectos' });
     }
 };
 exports.login = login;
