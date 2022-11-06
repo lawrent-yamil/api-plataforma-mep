@@ -13,6 +13,12 @@ app.set('port', config.PORT);
 /* Routes */
 app.use('/user', userRouter);
 
+app.get('/', (req, res) => {
+  return res.json({
+    message: 'Bienvenido a la API de NodeJS + TypeScript',
+  })
+})
+
 /* Server */
 app.listen(app.get('port'), () => {
   console.log(`Server is running on port ${app.get('port')} 🚀`);

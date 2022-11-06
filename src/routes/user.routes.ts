@@ -4,6 +4,6 @@ import { login } from "../controllers/user.controller";
 const router: Router = Router();
 
 // Login with firebase
-router.get("/login", login);
+router.post("/login", login);
 
 export default router;
