@@ -1,7 +1,8 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response} from 'express';
 import cors from 'cors';
 import { config } from './config';
 import userRouter from './routes/user.routes';
+import { pool } from './config';
 
 const app: Application = express();
 
@@ -13,14 +14,15 @@ app.use(cors());
 /* Routes */
 app.use('/user', userRouter);
 
-app.get('/', (req, res) => {
-  return res.json({
-    message: 'Bienvenido a la API de NodeJS + TypeScript del MEP',
-  })
-})
+app.get('/', async (req: Request, res: Response) => {
+  const response = await pool.query('SELECT * FROM tb_users');
+  return res.json(response.rows);
+});
 
 /* Server */
 app.listen(app.get('port'), () => {
   console.log(`Server is running on port ${app.get('port')} 🚀`);
   console.log(`http://localhost:${app.get('port')}`);
 });
+
+// ✈️ 🏢🏢
