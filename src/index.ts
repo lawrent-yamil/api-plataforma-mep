@@ -15,8 +15,9 @@ app.use(cors());
 app.use('/user', userRouter);
 
 app.get('/', async (req: Request, res: Response) => {
-  const response = await pool.query('SELECT * FROM tb_users');
-  return res.json(response.rows);
+  return res.status(200).json({
+    message: 'Bienvenido a la API REST de la Plataforma del MEP, desarrollada en NodeJS y Typescript',
+  });
 });
 
 /* Server */
