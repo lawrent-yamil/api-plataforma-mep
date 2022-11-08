@@ -72,7 +72,7 @@ export async function signup(
     );
 
     // Generate the token with the email and password
-    const token = jwt.sign({ email, password }, 'secret');
+    const token = jwt.sign({ email, hashedPassword }, 'secret');
 
     // Send the token to the client
     return res.json({ token });

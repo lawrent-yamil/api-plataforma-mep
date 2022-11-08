@@ -28,6 +28,7 @@ async function login(req, res) {
             email: user.rows[0].email,
             password: user.rows[0].password,
         }, 'tokentest');
+        console.log(user.rows[0].password);
         // Return the token
         return res.status(200).json({ token });
     }
@@ -52,7 +53,7 @@ async function signup(req, res) {
         // Insert the user into the database
         await config_1.pool.query('INSERT INTO tb_users (email, password) VALUES ($1, $2) RETURNING *', [email, hashedPassword]);
         // Generate the token with the email and password
-        const token = jsonwebtoken_1.default.sign({ email, password }, 'secret');
+        const token = jsonwebtoken_1.default.sign({ email, hashedPassword }, 'secret');
         // Send the token to the client
         return res.json({ token });
     }
