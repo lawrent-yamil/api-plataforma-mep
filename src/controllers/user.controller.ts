@@ -13,7 +13,7 @@ export const login = async (req: Request<User>, res: Response) => {
 
     // Check if the user exists
     if (!user.rows[0]) {
-      return res.status(401).json("Email or passwor doesn't match");
+      return res.status(401).json("Email or passwor doesn't match"); 
     }
 
     // Check if the password is correct
